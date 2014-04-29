@@ -7,8 +7,8 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 
 /**
- * test
- * @author normenhansen
+ *
+ * @author faithninja
  */
 public class Main extends SimpleApplication implements ScreenController{
     public Nifty nifty;
@@ -34,7 +34,7 @@ public class Main extends SimpleApplication implements ScreenController{
         guiViewPort.addProcessor(niftyDisplay);
 
         // disable the fly cam
-//        flyCam.setEnabled(false);
+        flyCam.setEnabled(false);
         flyCam.setDragToRotate(true);
         inputManager.setCursorVisible(true);
     }
@@ -49,9 +49,5 @@ public class Main extends SimpleApplication implements ScreenController{
 
     public void onEndScreen() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public void goToScreen(String nextScreen){
-        nifty.gotoScreen(nextScreen);
     }
 }
