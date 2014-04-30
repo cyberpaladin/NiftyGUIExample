@@ -14,36 +14,44 @@ import de.lessvoid.nifty.screen.ScreenController;
  */
 public class StartScreenController implements ScreenController {
     public Nifty nifty;
+    public Screen screen;
     
     public void bind(Nifty nifty, Screen screen) {
         this.nifty=nifty;
-        System.out.println("bind(" + screen.getScreenId() + ")");
+        this.screen=screen;
+        System.out.println("" + screen.getScreenId() + " - bind(" + screen.getScreenId() + ")");
     }
  
     public void onStartScreen() {
-        System.out.println("onStartScreen");
+        //magic happens in xml-file
+        
+        System.out.println("" + screen.getScreenId() + " - onStartScreen");
     }
  
     public void onEndScreen() {
-        /*Collection<String> screens = nifty.getAllScreensName();
-        for(String each:screens){
-            if(!nifty.getScreen(each).isNull()){
-                nifty.getScreen(each).endScreen(null);
-            }
-        }*/
+        screen.getRootElement().resetAllEffects();
+        //magic happens in xml-file
         
-        System.out.println("onEndScreen");
+        System.out.println("" + screen.getScreenId() + " - onEndScreen");
     }
     
     /** custom methods */ 
     public void start(String nextScreen) {
-        System.out.println("goToScreen(" + nextScreen + ")");
+        System.out.println("" + screen.getScreenId() + " - goToScreen(" + nextScreen + ")");
         
         nifty.gotoScreen(nextScreen);  // switch to another screen
     }
  
     public void quit() {
-        //onEndScreen();
+        nifty.getCurrentScreen().endScreen(null);
+        long count = System.currentTimeMillis();
+        while(count>System.currentTimeMillis()-1000){
+            nifty.getCurrentScreen().resetLayout();
+            //nifty.update();
+            //nifty.render(true);
+            //nifty.getCurrentScreen().endScreen(null);
+        }
+        nifty.exit();
         System.exit(0);
     }
 }
