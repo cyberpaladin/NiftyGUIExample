@@ -27,10 +27,11 @@
             </panel>
         </layer>-->
         <layer id="start-foreground" childLayout="horizontal">
-            <panel id="panel_horizontal_left" height="100%" width="66%"/>
+            <panel id="panel_horizontal_left" height="100%" width="66%">
+            </panel>
             <panel id="panel_horizontal_right" height="100%" width="33%" childLayout="vertical">
                 <panel id="panel_vertical_top" height="50%" width="100%"/>
-                <panel id="panel_menu" height="33%" width="33%" childLayout="vertical">
+                <panel id="panel_menu" height="33%" width="33%" childLayout="vertical" style="nifty-panel">
                     <panel id="panel_title" height="30%" childLayout="center">
                         <text text="SBB simulation" font="Interface/Fonts/Default.fnt" height="100%" width="100%" color="#000000"/>
                     </panel>
@@ -41,7 +42,7 @@
                     </panel>
                     <panel id="panel_sim" height="10%" childLayout="center">    
                         <control name="button" label="Start Simulation" id="StartSim" visibleToMouse="true">
-                            
+                            <interact onClick="start(hud)"/>
                         </control>
                     </panel>
                     <panel id="panel_report" height="10%" childLayout="center">    
