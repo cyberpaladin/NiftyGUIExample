@@ -20,8 +20,8 @@
                             <onCustom customKey="onHide" name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true" neverStopRendering="true"/>
                         </effect>-->
                         <effect>
-                            <onStartScreen name="move" mode="in" direction="top" length="1000" startDelay="1000" inherit="true" neverStopRendering="true"/>
-                            <onEndScreen name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true" neverStopRendering="true"/>
+                            <onStartScreen name="move" mode="in" direction="top" length="1000" startDelay="0" inherit="true" neverStopRendering="true"/>
+                            <onEndScreen name="move" mode="out" direction="top" length="1000" startDelay="0" inherit="true" neverStopRendering="true"/>
                         </effect>
                         
                         <panel id="start-panel-title" height="30%" width="100%" childLayout="vertical">
@@ -257,8 +257,8 @@
                 <effect>
                     <onStartScreen name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true"/>
                     <onEndScreen name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true"/>
-                    <onShow name="move" mode="in" direction="bottom" length="100" startDelay="100" inherit="true"/>
-                    <onHide name="move" mode="out" direction="bottom" length="100" startDelay="0" inherit="true"/>
+                    <onShow name="move" mode="in" direction="bottom" length="1000" startDelay="100" inherit="true"/>
+                    <onHide name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true"/>
                 </effect>
             </panel>
         </layer>
@@ -273,7 +273,7 @@
                 <effect>
                     <onStartScreen name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true"/>
                     <onEndScreen name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true"/>
-                    <onShow name="move" mode="in" direction="bottom" length="100" startDelay="100" inherit="true"/>
+                    <onShow name="move" mode="in" direction="bottom" length="100" startDelay="1000" inherit="true"/>
                     <onHide name="move" mode="out" direction="bottom" length="100" startDelay="0" inherit="true"/>
                     <onHover name="hide" targetElement="sim1-panel-mouse-check-bottom" inherit="true"/>
                     <onHover name="show" targetElement="sim1-panel-bottom" inherit="true"/>

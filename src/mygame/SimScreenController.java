@@ -41,14 +41,6 @@ public class SimScreenController implements ScreenController{
         System.out.println("" + screen.getScreenId() + " - onEndScreen");
     }
     
-    public void onHide(){
-        
-    }
-    
-    public void onShow(){
-        
-    }
-    
     /** custom methods */ 
     public void start(String nextScreen) {
         System.out.println("" + screen.getScreenId() + " - goToScreen(" + nextScreen + ")");
