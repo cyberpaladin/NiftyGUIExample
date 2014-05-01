@@ -85,7 +85,7 @@
                     </control>
                 </panel>
                 <panel id="locomotives-panel-locomotives" height="100%" width="20%" childLayout="center">    
-                    <control name="button" label="Locomotives" id="locomotives-button-locomotives" visibleToMouse="true"/>
+                    <control name="label" text="Locomotives" id="locomotives-label-locomotives"/>
                 </panel>
                 <panel id="locomotives-panel-lines" height="100%" width="20%" childLayout="center">    
                     <control name="button" label="Lines" id="locomotives-button-lines" visibleToMouse="true">
@@ -132,8 +132,10 @@
                                     <panel id="locomotives-panel-controller-radiobuttons-1" height="50%" width="100%" childLayout="vertical">
                                         <panel id="locomotives-panel-direction-1" height="50%" width="100%" childLayout="horizontal">
                                             <control name="radioButtonGroup" id="direction"/> 
-                                            <panel id="locomotives-panel-direction-left-1" height="50%" width="50%" paddingLeft="20px" childLayout="horizontal">
-                                                <text text="Direction" font="Interface/Fonts/Default.fnt" height="100%" color="#000000"/>
+                                            <panel id="locomotives-panel-direction-left-1" height="50%" width="50%" childLayout="center">
+                                                <panel id="locomotives-panel-direction-left-center-1" height="50%" width="100%" paddingLeft="20px" childLayout="horizontal">
+                                                    <control name="label" text="Direction"/>
+                                                </panel>
                                             </panel>
                                             <panel id="locomotives-panel-direction-right-1" height="100%" width="50%" childLayout="vertical">
                                                 <panel id="locomotives-panel-direction-right-top-1" height="50%" width="100%" childLayout="horizontal">
@@ -142,8 +144,10 @@
                                                                 
                                                         </control>
                                                     </panel>
-                                                    <panel id="locomotives-panel-direction-right-top-right-1" height="100%" width="50%" childLayout="horizontal">
-                                                        <text text="Forward" font="Interface/Fonts/Default.fnt" height="100%" color="#000000"/>
+                                                    <panel id="locomotives-panel-direction-right-top-right-1" height="100%" width="50%" childLayout="center">
+                                                        <panel id="locomotives-panel-direction-right-top-right-center-1" height="50%" width="100%" childLayout="horizontal">
+                                                            <control name="label" text="Forward"/>
+                                                        </panel>
                                                     </panel>
                                                 </panel>
                                                 <panel id="locomotives-panel-direction-right-bottom-1" height="50%" width="100%" childLayout="horizontal">
@@ -152,8 +156,10 @@
                                                                 
                                                         </control>
                                                     </panel>
-                                                    <panel id="locomotives-panel-direction-right-bottom-right-1" height="100%" width="50%" childLayout="horizontal">
-                                                        <text text="Backward" font="Interface/Fonts/Default.fnt" height="100%" color="#000000"/>
+                                                    <panel id="locomotives-panel-direction-right-bottom-right-1" height="100%" width="50%" childLayout="center">
+                                                        <panel id="locomotives-panel-direction-right-bottom-right-center-1" height="50%" width="100%" childLayout="horizontal">
+                                                            <control name="label" text="Backward"/>
+                                                        </panel>
                                                     </panel>
                                                 </panel>
                                             </panel>
@@ -161,8 +167,10 @@
 
                                         <panel id="locomotives-panel-lights-1" height="50%" width="100%" childLayout="horizontal">
                                             <control name="radioButtonGroup" id="lights"/> 
-                                            <panel id="locomotives-panel-lights-left-1" height="50%" width="50%" paddingLeft="20px" childLayout="horizontal">
-                                                <text text="Lights" font="Interface/Fonts/Default.fnt" height="100%" color="#000000"/>
+                                            <panel id="locomotives-panel-lights-left-1" height="50%" width="50%" childLayout="center">
+                                                <panel id="locomotives-panel-lights-left-center-1" height="50%" width="100%" paddingLeft="20px" childLayout="horizontal">
+                                                    <control name="label" text="Lights"/>
+                                                </panel>
                                             </panel>
                                             <panel id="locomotives-panel-lights-right-1" height="100%" width="50%" childLayout="vertical">
                                                 <panel id="locomotives-panel-lights-right-top-1" height="50%" width="100%" childLayout="horizontal">
@@ -171,8 +179,10 @@
                                                                 
                                                         </control>
                                                     </panel>
-                                                    <panel id="locomotives-panel-lights-right-top-right-1" height="100%" width="50%" childLayout="horizontal">
-                                                        <text text="On" font="Interface/Fonts/Default.fnt" height="100%" color="#000000"/>
+                                                    <panel id="locomotives-panel-lights-right-top-right-1" height="100%" width="50%" childLayout="center">
+                                                        <panel id="locomotives-panel-lights-right-top-right-center-1" height="50%" width="100%" childLayout="horizontal">
+                                                            <control name="label" text="On"/>
+                                                        </panel>
                                                     </panel>
                                                 </panel>
                                                 <panel id="locomotives-panel-lights-right-bottom-1" height="50%" width="100%" childLayout="horizontal">
@@ -181,8 +191,10 @@
                                                                 
                                                         </control>
                                                     </panel>
-                                                    <panel id="locomotives-panel-lights-right-bottom-right-1" height="100%" width="50%" childLayout="horizontal">
-                                                        <text text="Off" font="Interface/Fonts/Default.fnt" height="100%" color="#000000"/>
+                                                    <panel id="locomotives-panel-lights-right-bottom-right-1" height="100%" width="50%" childLayout="center">
+                                                        <panel id="locomotives-panel-lights-right-bottom-right-center-1" height="50%" width="100%" childLayout="horizontal">
+                                                            <control name="label" text="Off"/>
+                                                        </panel>
                                                     </panel>
                                                 </panel>
                                             </panel>-->
