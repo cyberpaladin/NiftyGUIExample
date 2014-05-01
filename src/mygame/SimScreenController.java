@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 package mygame;
- 
+
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
@@ -12,7 +12,7 @@ import de.lessvoid.nifty.screen.ScreenController;
  *
  * @author faithninja
  */
-public class StartScreenController implements ScreenController {
+public class SimScreenController implements ScreenController{
     public Nifty nifty;
     public Screen screen;
     
@@ -24,6 +24,9 @@ public class StartScreenController implements ScreenController {
  
     public void onStartScreen() {
         //magic happens in xml-file
+        //nifty.getCurrentScreen().findElementByName("locomotives-panel-top-buttons").startEffect(EffectEventId.onCustom, null, "onShow");
+        //nifty.getCurrentScreen().findElementByName("locomotives-panel-menu").startEffect(EffectEventId.onCustom, null, "onShow");
+        //nifty.getCurrentScreen().findElementByName("locomotives-panel-bottom-buttons").startEffect(EffectEventId.onCustom, null, "onShow");
         
         System.out.println("" + screen.getScreenId() + " - onStartScreen");
     }
@@ -31,6 +34,9 @@ public class StartScreenController implements ScreenController {
     public void onEndScreen() {
         screen.getRootElement().resetAllEffects();
         //magic happens in xml-file
+        //nifty.getCurrentScreen().findElementByName("locomotives-panel-top-buttons").startEffect(EffectEventId.onCustom, null, "onHide");
+        //nifty.getCurrentScreen().findElementByName("locomotives-panel-menu").startEffect(EffectEventId.onCustom, null, "onHide");
+        //nifty.getCurrentScreen().findElementByName("locomotives-panel-bottom-buttons").startEffect(EffectEventId.onCustom, null, "onHide");
         
         System.out.println("" + screen.getScreenId() + " - onEndScreen");
     }
@@ -42,8 +48,11 @@ public class StartScreenController implements ScreenController {
         nifty.gotoScreen(nextScreen);  // switch to another screen
     }
  
-    public void quit() throws InterruptedException {
+    public void quit() {
+        //onExit();
+        nifty.getCurrentScreen().endScreen(null);
+        //nifty.wait(0);
         nifty.exit();
-        new ExitDelay(1000);
+        System.exit(0);
     }
 }

@@ -6,72 +6,61 @@
         <layer id="start-background" childLayout="center">
             <image filename="Interface/start-background.jpg" width="90%" height="100%"/>
         </layer>
-        <!--<layer id="foreground" childLayout="vertical">
-            <panel id="panel_top" height="25%" width="75%" align="center" childLayout="horizontal">
-                <text text="SBB simulation" font="Interface/Fonts/Default.fnt" width="100%" height="100%" color="#000000"/>
-            </panel>
-            <panel id="panel_mid" height="50%" width="75%" align="center" childLayout="center">
-                <text text="Swiss Federal Railways (German: Schweizerische Bundesbahnen, French: Chemins de fer fédéraux suisses, Italian: Ferrovie federali svizzere) is the national railway company of Switzerland. It is usually referred to by the initials of its German, French and Italian names, either concatenated as SBB CFF FFS, or used separately. The Romansh version of its name, Viafiers federalas svizras, is not officially used.[1][2][3] The company is headquartered in Bern. Formerly a government institution, since 1999 it has been a special stock corporation with all shares held by the Swiss Confederation or the Swiss cantons." font="Interface/Fonts/Default.fnt" width="100%" height="100%" wrap="true" color="#000000"/>
-            </panel>
-            <panel id="panel_bottom" height="25%" width="75%" align="center" childLayout="horizontal" >
-                <panel id="panel_bottom_left" height="50%" width="50%" valign="center" childLayout="center">
-                    <control name="button" label="Start" id="StartButton" align="center" valign="center" visibleToMouse="true">
-                        <interact onClick="startGame(hud)"/>
-                    </control>
-                </panel>
-                <panel id="panel_bottom_right" height="50%" width="50%" valign="center" childLayout="center">
-                    <control name="button" label="Quit" id="QuitButton" align="center" valign="center" visibleToMouse="true">
-                        <interact onClick="quitGame()"/>
-                    </control>
-                </panel>
-            </panel>
-        </layer>-->
         <layer id="start-foreground" childLayout="horizontal">
-            <panel id="start-panel-horizontal-left" height="100%" width="66%">
+            <panel id="start-panel-horizontal-left" height="100%" width="50%">
             </panel>
-            <panel id="start-panel-horizontal-right" height="100%" width="33%" childLayout="vertical">
-                <panel id="start-panel-vertical-top" height="50%" width="100%"/>
-                <panel id="start-panel-menu" height="33%" width="33%" childLayout="vertical" style="nifty-panel">
-                    <!--<effect>
-                        <onCustom customKey="onShow" name="move" mode="in" direction="top" length="1000" startDelay="0" inherit="true" neverStopRendering="true"/>
-                    </effect>
-                    <effect>
-                        <onCustom customKey="onHide" name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true" neverStopRendering="true"/>
-                    </effect>-->
-                    <effect>
-                        <onStartScreen name="move" mode="in" direction="top" length="1000" startDelay="0" inherit="true" neverStopRendering="true"/>
-                    </effect>
-                    <effect>
-                        <onEndScreen name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true" neverStopRendering="true"/>
-                    </effect>
-                    
-                    <panel id="start-panel-title" height="30%" childLayout="center">
-                        <text text="SBB simulation" font="Interface/Fonts/Default.fnt" height="100%" width="100%" color="#000000"/>
-                    </panel>
-                    <panel id="start-panel-system" height="10%" childLayout="center">
-                        <control name="button" label="Start System" id="start-button-system" visibleToMouse="true">
-                            <interact onClick="start(locomotives)"/>
-                        </control>
-                    </panel>
-                    <panel id="start-panel-sim" height="10%" childLayout="center">    
-                        <control name="button" label="Start Simulation" id="start-button-sim" visibleToMouse="true">
-                            <interact onClick="start(hud)"/>
-                        </control>
-                    </panel>
-                    <panel id="start-panel-report" height="10%" childLayout="center">    
-                        <control name="button" label="Read Report" id="start-button-report" visibleToMouse="true">
-                            
-                        </control>
-                    </panel>
-                    <panel id="start-panel-credits" height="10%" childLayout="center">    
-                        <control name="button" label="Credits" id="start-button-credits" visibleToMouse="true">
-                            
-                        </control>
-                    </panel>
-                    <panel id="start-panel-quit" height="10%" childLayout="center">    
-                        <control name="button" label="Quit" id="start-button-quit" visibleToMouse="true">
-                            <interact onClick="quit()"/>
-                        </control>
+            <panel id="start-panel-horizontal-right" height="100%" width="50%" childLayout="center">
+                <panel id="start-panel-horizontal-right-vertical" height="100%" width="80%" childLayout="vertical">
+                    <panel id="start-panel-vertical-top" height="50%" width="100%"/>
+                    <panel id="start-panel-menu" height="33%" width="50%" childLayout="vertical" style="nifty-panel">
+                        <!--<effect>
+                            <onCustom customKey="onShow" name="move" mode="in" direction="top" length="1000" startDelay="0" inherit="true" neverStopRendering="true"/>
+                        </effect>
+                        <effect>
+                            <onCustom customKey="onHide" name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true" neverStopRendering="true"/>
+                        </effect>-->
+                        <effect>
+                            <onStartScreen name="move" mode="in" direction="top" length="1000" startDelay="1000" inherit="true" neverStopRendering="true"/>
+                        </effect>
+                        <effect>
+                            <onEndScreen name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true" neverStopRendering="true"/>
+                        </effect>
+                        
+                        <panel id="start-panel-title" height="30%" width="100%" childLayout="vertical">
+                            <panel id="start-panel-title-top" height="50%" width="100%" childLayout="center">
+                                <text text="SBB RTCS" font="Interface/Fonts/Default.fnt" width="100%" fontSize="20px" color="#000000"/>
+                            </panel>
+                            <panel id="start-panel-title-bottom" height="20%" width="100%" childLayout="center">
+                                <text text="(remote train control system)" font="Interface/Fonts/Default.fnt" width="100%" fontSize="10px" color="#000000"/>
+                            </panel>
+                        </panel>
+                        <panel id="start-panel-buttons" height="70%" width="100%" childLayout="vertical">
+                            <panel id="start-panel-system" height="20%" width="100%" childLayout="center">
+                                <control name="button" label="Start System" id="start-button-system" visibleToMouse="true">
+                                    <interact onClick="start(locomotives)"/>
+                                </control>
+                            </panel>
+                            <panel id="start-panel-sim" height="20%" width="100%" childLayout="center">    
+                                <control name="button" label="Start Simulation" id="start-button-sim" visibleToMouse="true">
+                                    <interact onClick="start(sim1)"/>
+                                </control>
+                            </panel>
+                            <panel id="start-panel-report" height="20%" width="100%" childLayout="center">    
+                                <control name="button" label="Read Report" id="start-button-report" visibleToMouse="true">
+                                    
+                                </control>
+                            </panel>
+                            <panel id="start-panel-credits" height="20%" width="100%" childLayout="center">    
+                                <control name="button" label="Credits" id="start-button-credits" visibleToMouse="true">
+                                    
+                                </control>
+                            </panel>
+                            <panel id="start-panel-quit" height="20%" width="100%" childLayout="center">    
+                                <control name="button" label="Quit" id="start-button-quit" visibleToMouse="true">
+                                    <interact onClick="quit()"/>
+                                </control>
+                            </panel>
+                        </panel>
                     </panel>
                 </panel>
             </panel>
@@ -82,15 +71,39 @@
             <image filename="Interface/system-background.jpg" width="100%" height="100%"/>
         </layer>
         <layer id="locomotives-foreground" childLayout="vertical">
-            <panel id="locomotives-panel-top-buttons" height="10%" width="100%" childLayout="horizontal" style="nifty-panel">
+            <panel id="locomotives-panel-top-buttons" height="5%" width="100%" childLayout="horizontal" style="nifty-panel-no-shadow">
                 <effect>
                     <onStartScreen name="move" mode="in" direction="top" length="1000" startDelay="0" inherit="true"/>
                 </effect>
                 <effect>
                     <onEndScreen name="move" mode="out" direction="top" length="1000" startDelay="0" inherit="true"/>
                 </effect>
-            </panel>-->
-            <panel id="locomotives-panel-middle" height="60%" width="100%" childLayout="horizontal">
+                
+                <panel id="locomotives-panel-main" height="100%" width="20%" childLayout="center">    
+                    <control name="button" label="Main menu" id="locomotives-button-main" visibleToMouse="true">
+                        <interact onClick="start(start)"/>
+                    </control>
+                </panel>
+                <panel id="locomotives-panel-locomotives" height="100%" width="20%" childLayout="center">    
+                    <control name="button" label="Locomotives" id="locomotives-button-locomotives" visibleToMouse="true"/>
+                </panel>
+                <panel id="locomotives-panel-lines" height="100%" width="20%" childLayout="center">    
+                    <control name="button" label="Lines" id="locomotives-button-lines" visibleToMouse="true">
+                        <!--<interact onClick="start(start)"/>-->
+                    </control>
+                </panel>
+                <panel id="locomotives-panel-settings" height="100%" width="20%" childLayout="center">    
+                    <control name="button" label="Settings" id="locomotives-button-settings" visibleToMouse="true">
+                        <!--<interact onClick="start(start)"/>-->
+                    </control>
+                </panel>
+                <panel id="locomotives-panel-quit" height="100%" width="20%" childLayout="center">    
+                    <control name="button" label="Quit" id="locomotives-button-quit" visibleToMouse="true">
+                        <interact onClick="quit()"/>
+                    </control>
+                </panel>
+            </panel>
+            <panel id="locomotives-panel-middle" height="75%" width="100%" childLayout="horizontal">
                 <panel id="locomotives-panel-horizontal-left" height="100%" width="10%"/>
                 <panel id="locomotives-panel-horizontal-right" height="100%" width="80%" childLayout="vertical">
                     <panel id="locomotives-panel-vertical-top" height="5%" width="100%"/>
@@ -102,23 +115,139 @@
                             <onEndScreen name="move" mode="out" direction="left" length="1000" startDelay="0" inherit="true" neverStopRendering="true"/>
                         </effect>
 
-                        <panel id="locomotives-panel-title" height="30%" childLayout="center">
-                            <text text="Locomotive" font="Interface/Fonts/Default.fnt" height="100%" width="100%" color="#000000"/>
+                        <panel id="locomotives-panel-title" height="10%" childLayout="center">
+                            <text text="Locomotives" font="Interface/Fonts/Default.fnt" height="100%" width="100%" color="#000000"/>
                         </panel>
-                        <panel id="locomotives-panel-back" height="10%" childLayout="center">    
-                            <control name="button" label="Back" id="locomotives-button-back" visibleToMouse="true">
-                                <interact onClick="start(start)"/>
-                            </control>
-                        </panel>
-                        <panel id="locomotives-panel-quit" height="10%" childLayout="center">    
-                            <control name="button" label="Quit" id="locomotives-button-quit" visibleToMouse="true">
-                                <interact onClick="quit()"/>
-                            </control>
+                        <panel id="locomotives-panels" height="90%" width="100%" childLayout="horizontal">
+                            <panel id="locomotives-panel-controller-1" height="100%" width="33%" childLayout="horizontal">
+                                <panel id="locomotives-panel-controller-left-1" height="100%" width="90%" childLayout="vertical">
+                                    <panel id="locomotives-panel-controller-tacho-1" height="50%" width="100%" childLayout="center">
+                                        <panel id="locomotives-panel-controller-tacho-center-1" height="100%" width="80%" childLayout="center">
+                                            <image filename="Interface/tachometer.png" id="tacho-1" height="100%" width="100%" visibleToMouse="true" childLayout="center"> 
+                                                <interact onClick="clicked()"/>
+                                                <!--<image filename="Interface/pointer.png" id="pointer" height="85%" width="20%" visibleToMouse="true"/>-->
+                                            </image>
+                                        </panel>
+                                    </panel>
+                                    <panel id="locomotives-panel-controller-radiobuttons-1" height="50%" width="100%" childLayout="vertical">
+                                        <panel id="locomotives-panel-direction-1" height="50%" width="100%" childLayout="horizontal">
+                                            <control name="radioButtonGroup" id="direction"/> 
+                                            <panel id="locomotives-panel-direction-left-1" height="50%" width="50%" paddingLeft="20px" childLayout="horizontal">
+                                                <text text="Direction" font="Interface/Fonts/Default.fnt" height="100%" color="#000000"/>
+                                            </panel>
+                                            <panel id="locomotives-panel-direction-right-1" height="100%" width="50%" childLayout="vertical">
+                                                <panel id="locomotives-panel-direction-right-top-1" height="50%" width="100%" childLayout="horizontal">
+                                                    <panel id="locomotives-panel-direction-right-top-left-1" height="100%" width="50%" childLayout="center">
+                                                        <control name="radioButton" id="direction-rb1-1" group="direction" visibleToMouse="true"> 
+                                                                
+                                                        </control>
+                                                    </panel>
+                                                    <panel id="locomotives-panel-direction-right-top-right-1" height="100%" width="50%" childLayout="horizontal">
+                                                        <text text="Forward" font="Interface/Fonts/Default.fnt" height="100%" color="#000000"/>
+                                                    </panel>
+                                                </panel>
+                                                <panel id="locomotives-panel-direction-right-bottom-1" height="50%" width="100%" childLayout="horizontal">
+                                                    <panel id="locomotives-panel-direction-right-bottom-left-1" height="100%" width="50%" childLayout="center">
+                                                        <control name="radioButton" id="direction-rb2-1" group="direction" visibleToMouse="true"> 
+                                                                
+                                                        </control>
+                                                    </panel>
+                                                    <panel id="locomotives-panel-direction-right-bottom-right-1" height="100%" width="50%" childLayout="horizontal">
+                                                        <text text="Backward" font="Interface/Fonts/Default.fnt" height="100%" color="#000000"/>
+                                                    </panel>
+                                                </panel>
+                                            </panel>
+                                        </panel>
+
+                                        <panel id="locomotives-panel-lights-1" height="50%" width="100%" childLayout="horizontal">
+                                            <control name="radioButtonGroup" id="lights"/> 
+                                            <panel id="locomotives-panel-lights-left-1" height="50%" width="50%" paddingLeft="20px" childLayout="horizontal">
+                                                <text text="Lights" font="Interface/Fonts/Default.fnt" height="100%" color="#000000"/>
+                                            </panel>
+                                            <panel id="locomotives-panel-lights-right-1" height="100%" width="50%" childLayout="vertical">
+                                                <panel id="locomotives-panel-lights-right-top-1" height="50%" width="100%" childLayout="horizontal">
+                                                    <panel id="locomotives-panel-lights-right-top-left-1" height="100%" width="50%" childLayout="center">
+                                                        <control name="radioButton" id="lights-rb1-1" group="lights" visibleToMouse="true"> 
+                                                                
+                                                        </control>
+                                                    </panel>
+                                                    <panel id="locomotives-panel-lights-right-top-right-1" height="100%" width="50%" childLayout="horizontal">
+                                                        <text text="On" font="Interface/Fonts/Default.fnt" height="100%" color="#000000"/>
+                                                    </panel>
+                                                </panel>
+                                                <panel id="locomotives-panel-lights-right-bottom-1" height="50%" width="100%" childLayout="horizontal">
+                                                    <panel id="locomotives-panel-lights-right-bottom-left-1" height="100%" width="50%" childLayout="center">
+                                                        <control name="radioButton" id="lights-rb2-1" group="lights" visibleToMouse="true"> 
+                                                                
+                                                        </control>
+                                                    </panel>
+                                                    <panel id="locomotives-panel-lights-right-bottom-right-1" height="100%" width="50%" childLayout="horizontal">
+                                                        <text text="Off" font="Interface/Fonts/Default.fnt" height="100%" color="#000000"/>
+                                                    </panel>
+                                                </panel>
+                                            </panel>-->
+                                        </panel>
+                                    </panel>
+                                </panel>
+                                <panel id="locomotives-panel-controller-slider-1" height="100%" width="10%" childLayout="center">
+                                        <control name="verticalSlider" id="slider-1" height="100%" width="100%" visibleToMouse="true" min="-31" max="31" stepSize="1" buttonStepSize="1"> 
+
+                                        </control>
+                                </panel>
+                            </panel>
                         </panel>
                     </panel>
                 </panel>
             </panel>
-            <panel id="locomotives-panel-bottom-buttons" height="30%" width="100%" childLayout="horizontal" style="nifty-panel">
+            <panel id="locomotives-panel-bottom-buttons" height="20%" width="100%" childLayout="vertical" style="nifty-panel-no-shadow">
+                <effect>
+                    <onStartScreen name="move" mode="in" direction="bottom" length="1000" startDelay="0" inherit="true"/>
+                </effect>
+                <effect>
+                    <onEndScreen name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true"/>
+                </effect>
+
+                <panel id="locomotives-panel-emergency-stop" height="50%" width="100%" childLayout="center">    
+                    <control name="button" label="Emergency Stop" id="emergency-stop" height="90%" width="100%" visibleToMouse="true">
+                        <interact onClick="quit()"/>
+                    </control>
+                </panel>
+                <panel id="locomotives-panel-emergency-continue" height="50%" width="100%" childLayout="center">    
+                    <control name="button" label="Emergency Continue" id="emergency-continue" height="90%" width="100%" visibleToMouse="true">
+                        <!--<interact onClick="quit()"/>-->
+                    </control>
+                </panel>
+            </panel>
+        </layer>
+    </screen>
+    <screen id="sim1" controller="mygame.SimScreenController">
+        <layer id="sim1-overlay" childLayout="vertical">
+            <panel id="sim1-panel-top-buttons" height="5%" width="100%" childLayout="horizontal" style="nifty-panel-no-shadow">
+                <effect>
+                    <onStartScreen name="move" mode="in" direction="top" length="1000" startDelay="0" inherit="true"/>
+                </effect>
+                <effect>
+                    <onEndScreen name="move" mode="out" direction="top" length="1000" startDelay="0" inherit="true"/>
+                </effect>
+                
+                <panel id="sim1-panel-main" height="100%" width="33%" childLayout="center">    
+                    <control name="button" label="Main menu" id="sim1-button-main" visibleToMouse="true">
+                        <interact onClick="start(start)"/>
+                    </control>
+                </panel>
+                <panel id="sim1-panel-settings" height="100%" width="34%" childLayout="center">    
+                    <control name="button" label="Settings" id="sim1-button-settings" visibleToMouse="true">
+                        <!--<interact onClick="start(start)"/>-->
+                    </control>
+                </panel>
+                <panel id="sim1-panel-quit" height="100%" width="33%" childLayout="center">    
+                    <control name="button" label="Quit" id="sim1-button-quit" visibleToMouse="true">
+                        <interact onClick="quit()"/>
+                    </control>
+                </panel>
+            </panel>-->
+            <panel id="sim1-panel-middle" height="90%" width="100%"/>
+            <panel id="sim1-panel-bottom-buttons" height="5%" width="100%" childLayout="horizontal" style="nifty-panel-no-shadow">
                 <effect>
                     <onStartScreen name="move" mode="in" direction="bottom" length="1000" startDelay="0" inherit="true"/>
                 </effect>
@@ -127,8 +256,6 @@
                 </effect>
             </panel>
         </layer>
-    </screen>
-    <screen id="sim">
     </screen>
     <screen id="report">
     </screen>
