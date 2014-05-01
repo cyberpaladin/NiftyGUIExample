@@ -10,12 +10,12 @@ import de.lessvoid.nifty.elements.render.ImageRenderer;
 import de.lessvoid.nifty.render.NiftyImage;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -28,8 +28,14 @@ public class LocomotivesScreenController implements ScreenController{
     private Nifty nifty;
     private Screen screen;
     
+    int randomnumber =0;
+    int previousrandomnumber;
+    
+    final String imagename = "tachometer-made.png";
+    final String xmlelementid = "tacho-1";
+    
     // angle in radian to rotate the tachometer pointer 
-    private double angle=0;
+    private double angle;
     
     //test speed to play around with the GUI of the first locomotive
     private int speed;
@@ -98,8 +104,9 @@ public class LocomotivesScreenController implements ScreenController{
         }
         
         try {
-            makeTacho(angle,"tachometer-made.png");
-            setTacho("Interface/tachometer-made.png","tacho-1");
+            makeTacho(angle);
+            setTacho("Interface/");
+            //setTacho("Interface/tachometer-made.png","tacho-1");
         } catch (IOException ex) {
             Logger.getLogger(LocomotivesScreenController.class.getName()).log(Level.SEVERE, "can't make tacho", ex);
         }
@@ -110,7 +117,7 @@ public class LocomotivesScreenController implements ScreenController{
         System.out.println("Angle: "+angle+" --> "+Math.toDegrees(angle));
     }
     
-    private void makeTacho(double angle, String targetname) throws IOException {
+    private void makeTacho(double angle) throws IOException {
         // load source images
         BufferedImage background = ImageIO.read(new File("assets/Interface/tachometer.png"));
         BufferedImage pointer = ImageIO.read(new File("assets/Interface/pointer.png"));
@@ -118,11 +125,9 @@ public class LocomotivesScreenController implements ScreenController{
         // create the new image
         BufferedImage tacho = new BufferedImage(background.getWidth(), background.getHeight(), BufferedImage.TYPE_INT_ARGB);
 
-
         // paint tachometer background, preserving the alpha channels
-        Graphics g = tacho.getGraphics();
+        Graphics2D g = tacho.createGraphics();
         g.drawImage(background, 0, 0, null);
-
 
         // create the transform, note that the transformations happen in reversed order (so check them backwards)
         AffineTransform at = new AffineTransform();
@@ -140,32 +145,40 @@ public class LocomotivesScreenController implements ScreenController{
         //    center (easier :))
         at.translate(-pointer.getWidth()/2, -pointer.getHeight()/2);
 
-        // draw the image
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(pointer, at, null);
+        // add pointer over background
+        g.drawImage(pointer, at, null);
 
-        // Save as new image
-        ImageIO.write(tacho, "PNG", new File("assets/Interface/"+targetname));
+        previousrandomnumber = randomnumber;
+        randomnumber = new Random().nextInt(899)+100;
+        
+        // save as new image
+        ImageIO.write(tacho, "PNG", new File("assets/Interface/"+randomnumber+imagename));
+        //ImageIO.write(tacho, "PNG", new File("assets/Interface/"+targetname));
 
         // get rid of all graphic elements
+        g.dispose();
         background.flush();
         background = null;
         pointer.flush();
         pointer = null;
         tacho.flush();
         tacho = null;
-        g.dispose();
-        g2d.dispose();
+        System.gc();
     }
         
-    private void setTacho(String path, String id){
+    private void setTacho(String path){
         // load or create new image
-        NiftyImage tachometer = nifty.createImage(path, false);
+        NiftyImage tachometer = nifty.createImage(path+randomnumber+imagename, false);
         
         // find old image
-        Element niftyElement = nifty.getCurrentScreen().findElementByName(id);
+        Element niftyElement = nifty.getCurrentScreen().findElementByName(xmlelementid);
         
         // swap old with new image
         niftyElement.getRenderer(ImageRenderer.class).setImage(tachometer);
+                
+        // delete that same image
+        if(previousrandomnumber!=0){
+            new File(path+previousrandomnumber+imagename).delete();
+        }
     }
 }
