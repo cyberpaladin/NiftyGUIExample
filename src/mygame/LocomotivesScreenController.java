@@ -15,6 +15,10 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,18 +31,12 @@ import javax.imageio.ImageIO;
 public class LocomotivesScreenController implements ScreenController{
     private Nifty nifty;
     private Screen screen;
-    
     int randomnumber =0;
-    int previousrandomnumber;
-    
+    int previousrandomnumber=0;
     final String imagename = "tachometer-made.png";
     final String xmlelementid = "tacho-1";
-    
-    // angle in radian to rotate the tachometer pointer 
-    private double angle;
-    
-    //test speed to play around with the GUI of the first locomotive
-    private int speed;
+    private double angle; // angle in radian to rotate the tachometer pointer 
+    private int speed; //test speed to play around with the GUI of the first locomotive
     
     public void bind(Nifty nifty, Screen screen) {
         this.nifty=nifty;
@@ -64,10 +62,7 @@ public class LocomotivesScreenController implements ScreenController{
  
     public void onEndScreen() {
         screen.getRootElement().resetAllEffects();
-        //magic happens in xml-file
-        //nifty.getCurrentScreen().findElementByName("locomotives-panel-top-buttons").startEffect(EffectEventId.onCustom, null, "onHide");
-        //nifty.getCurrentScreen().findElementByName("locomotives-panel-menu").startEffect(EffectEventId.onCustom, null, "onHide");
-        //nifty.getCurrentScreen().findElementByName("locomotives-panel-bottom-buttons").startEffect(EffectEventId.onCustom, null, "onHide");
+        deleteTacho();
         
         System.out.println("" + screen.getScreenId() + " - onEndScreen");
     }
@@ -81,6 +76,9 @@ public class LocomotivesScreenController implements ScreenController{
  
     public void quit() {
         nifty.exit();
+        deleteTacho();
+        
+        // wait for nifty to apply onEndScreen effects
         new ExitDelay(1000);
     }
     
@@ -105,7 +103,7 @@ public class LocomotivesScreenController implements ScreenController{
         
         try {
             makeTacho(angle);
-            setTacho("Interface/");
+            setTacho("Interface/tmp/");
             //setTacho("Interface/tachometer-made.png","tacho-1");
         } catch (IOException ex) {
             Logger.getLogger(LocomotivesScreenController.class.getName()).log(Level.SEVERE, "can't make tacho", ex);
@@ -152,21 +150,17 @@ public class LocomotivesScreenController implements ScreenController{
         randomnumber = new Random().nextInt(899)+100;
         
         // save as new image
-        ImageIO.write(tacho, "PNG", new File("assets/Interface/"+randomnumber+imagename));
+        ImageIO.write(tacho, "PNG", new File("assets/Interface/tmp/"+randomnumber+imagename));
         //ImageIO.write(tacho, "PNG", new File("assets/Interface/"+targetname));
 
         // get rid of all graphic elements
         g.dispose();
         background.flush();
-        background = null;
         pointer.flush();
-        pointer = null;
         tacho.flush();
-        tacho = null;
-        System.gc();
     }
         
-    private void setTacho(String path){
+    private void setTacho(String path) throws IOException{
         // load or create new image
         NiftyImage tachometer = nifty.createImage(path+randomnumber+imagename, false);
         
@@ -175,10 +169,21 @@ public class LocomotivesScreenController implements ScreenController{
         
         // swap old with new image
         niftyElement.getRenderer(ImageRenderer.class).setImage(tachometer);
-                
-        // delete that same image
-        if(previousrandomnumber!=0){
-            new File(path+previousrandomnumber+imagename).delete();
+        
+        // delete previous tachometer
+        try {
+            Path newpath = Paths.get("assets/"+path+previousrandomnumber+imagename);
+            Files.delete(newpath);
+        } catch (Exception e) {
+            System.out.format("Sorry, couldn't delete tachometer. %n%s%n",e);
+        }
+    }
+    private void deleteTacho(){
+        try {
+            Path newpath = Paths.get("assets/Interface/tmp/"+randomnumber+imagename);
+            Files.delete(newpath);
+        } catch (Exception e) {
+            System.out.format("Sorry, couldn't delete tachometer. %n%s%n",e);
         }
     }
 }
