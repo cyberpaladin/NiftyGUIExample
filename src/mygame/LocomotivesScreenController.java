@@ -5,6 +5,7 @@
 package mygame;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.effects.EffectEventId;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.ImageRenderer;
 import de.lessvoid.nifty.render.NiftyImage;
@@ -18,7 +19,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,43 +35,32 @@ public class LocomotivesScreenController implements ScreenController{
     int previousrandomnumber=0;
     final String imagename = "tachometer-made.png";
     final String xmlelementid = "tacho-1";
-    private double angle; // angle in radian to rotate the tachometer pointer 
+    private double angle = Math.toRadians(242); // angle in radian to rotate the tachometer pointer, default pointing to zero
     private int speed; //test speed to play around with the GUI of the first locomotive
     
     public void bind(Nifty nifty, Screen screen) {
         this.nifty=nifty;
         this.screen=screen;
-        System.out.println("" + screen.getScreenId() + " - bind(" + screen.getScreenId() + ")");
+        //System.out.println("" + screen.getScreenId() + " - bind(" + screen.getScreenId() + ")");
     }
  
     public void onStartScreen() {
-        //magic happens in xml-file
-        //nifty.getCurrentScreen().findElementByName("locomotives-panel-top-buttons").startEffect(EffectEventId.onCustom, null, "onShow");
-        //nifty.getCurrentScreen().findElementByName("locomotives-panel-bottom-buttons").startEffect(EffectEventId.onCustom, null, "onShow");
-        //nifty.getCurrentScreen().findElementByName("locomotives-panel-bottom-buttons").startEffect(EffectEventId.onCustom, null, "onShow");
-        
-        /*try {
-            makeTacho(Math.toRadians(242),"tachometer-made.png");
-            setTacho("Interface/tachometer-made.png","tacho-1");
-        } catch (IOException ex) {
-            Logger.getLogger(LocomotivesScreenController.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-
-        System.out.println("" + screen.getScreenId() + " - onStartScreen");
+        //System.out.println("" + screen.getScreenId() + " - onStartScreen");
     }
  
     public void onEndScreen() {
+        //make sure all effects wwill still be working by reseting them
         screen.getRootElement().resetAllEffects();
-        deleteTacho();
         
-        System.out.println("" + screen.getScreenId() + " - onEndScreen");
+        //delete tacho image from tmp files
+        deleteTacho(); 
+        //System.out.println("" + screen.getScreenId() + " - onEndScreen");
     }
     
     /** custom methods */ 
     public void start(String nextScreen) {
-        System.out.println("" + screen.getScreenId() + " - goToScreen(" + nextScreen + ")");
-        
         nifty.gotoScreen(nextScreen);  // switch to another screen
+        //System.out.println("" + screen.getScreenId() + " - goToScreen(" + nextScreen + ")");
     }
  
     public void quit() {
@@ -101,18 +90,26 @@ public class LocomotivesScreenController implements ScreenController{
             angle = Math.atan((double)opposite/adjacent)+Math.PI*3/2;
         }
         
+        //make sure pointer doesn't go out of range
+        if(angle<Math.toRadians(200) && Math.toRadians(156)<angle){
+            angle=Math.toRadians(156);
+        }
+        if(angle<Math.toRadians(242) && Math.toRadians(199)<angle){
+            angle=Math.toRadians(242);
+        }
+        
+        //make tacho image and set it to the GUI
         try {
             makeTacho(angle);
             setTacho("Interface/tmp/");
-            //setTacho("Interface/tachometer-made.png","tacho-1");
         } catch (IOException ex) {
             Logger.getLogger(LocomotivesScreenController.class.getName()).log(Level.SEVERE, "can't make tacho", ex);
         }
-        
-        System.out.println("Calculation:");
-        System.out.println("Adjacent: "+imgX+"-"+x+"+120 = "+adjacent);
-        System.out.println("Opposite: "+imgY+"-"+y+"+105 = "+opposite);
-        System.out.println("Angle: "+angle+" --> "+Math.toDegrees(angle));
+
+        //System.out.println("Calculation:");
+        //System.out.println("Adjacent: "+imgX+"-"+x+"+120 = "+adjacent);
+        //System.out.println("Opposite: "+imgY+"-"+y+"+105 = "+opposite);
+        //System.out.println("Angle: "+angle+" --> "+Math.toDegrees(angle));
     }
     
     private void makeTacho(double angle) throws IOException {
@@ -147,7 +144,9 @@ public class LocomotivesScreenController implements ScreenController{
         g.drawImage(pointer, at, null);
 
         previousrandomnumber = randomnumber;
-        randomnumber = new Random().nextInt(899)+100;
+        while(previousrandomnumber == randomnumber){
+            randomnumber = new Random().nextInt(899)+100;
+        }
         
         // save as new image
         ImageIO.write(tacho, "PNG", new File("assets/Interface/tmp/"+randomnumber+imagename));

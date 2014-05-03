@@ -2,6 +2,7 @@
 <nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty-1.3.xsd http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
     <useStyles filename="nifty-default-styles.xml" />
     <useControls filename="nifty-default-controls.xml" />
+    <registerSound id="startSound" filename="Interface/Sounds/sbb.ogg"/>
     <screen id="start" controller="mygame.StartScreenController">
         <layer id="start-background" childLayout="center">
             <image filename="Interface/start-background.jpg" width="90%" height="100%"/>
@@ -13,14 +14,9 @@
                 <panel id="start-panel-horizontal-right-vertical" height="100%" width="80%" childLayout="vertical">
                     <panel id="start-panel-vertical-top" height="50%" width="100%"/>
                     <panel id="start-panel-menu" height="33%" width="50%" childLayout="vertical" style="nifty-panel">
-                        <!--<effect>
-                            <onCustom customKey="onShow" name="move" mode="in" direction="top" length="1000" startDelay="0" inherit="true" neverStopRendering="true"/>
-                        </effect>
-                        <effect>
-                            <onCustom customKey="onHide" name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true" neverStopRendering="true"/>
-                        </effect>-->
                         <effect>
                             <onStartScreen name="move" mode="in" direction="top" length="1000" startDelay="0" inherit="true" neverStopRendering="true"/>
+                            <onCustom customKey="playStartSound" name="playSound" sound="startSound"/>
                             <onEndScreen name="move" mode="out" direction="top" length="1000" startDelay="0" inherit="true" neverStopRendering="true"/>
                         </effect>
                         
@@ -117,7 +113,7 @@
                                 <panel id="locomotives-panel-controller-left-1" height="100%" width="90%" childLayout="vertical">
                                     <panel id="locomotives-panel-controller-tacho-1" height="50%" width="100%" childLayout="center">
                                         <panel id="locomotives-panel-controller-tacho-center-1" height="100%" width="80%" childLayout="center">
-                                            <image filename="Interface/tachometer.png" id="tacho-1" height="100%" width="100%" visibleToMouse="true" childLayout="center"> 
+                                            <image filename="Interface/tachometer-default.png" id="tacho-1" height="100%" width="100%" visibleToMouse="true" childLayout="center"> 
                                                 <interact onClick="clicked()"/>
                                             </image>
                                         </panel>
@@ -224,6 +220,21 @@
         </layer>
     </screen>
     <screen id="sim1" controller="mygame.SimScreenController">
+        <layer id="sim1-mouse-check" childLayout="vertical">
+            <panel id="sim1-panel-mouse-check-top" height="95%" width="100%" childLayout="center"/>
+            <panel id="sim1-panel-mouse-check-bottom" height="5%" width="100%" childLayout="center">
+                <panel id="sim1-iconpanel" height="100%" width="10%" childLayout="center" visibleToMouse="true" style="nifty-panel-no-shadow">
+                    <effect>
+                        <onStartScreen name="move" mode="in" direction="bottom" length="0" startDelay="0" inherit="true" onEndEffect="hideNiftyElement(sim1-iconpanel)"/>
+                        <onEndScreen name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true"/>
+                        <onShow name="move" mode="in" direction="bottom" length="100" startDelay="1000" inherit="true"/>
+                        <onHide name="move" mode="out" direction="bottom" length="100" startDelay="0" inherit="true"/>
+                        <onStartHover name="hide" targetElement="sim1-panel-mouse-check-bottom" inherit="true" onEndEffect="showNiftyElement(sim1-inputpanel)"/>
+                        <!--<onHover name="show" targetElement="sim1-panel-bottom" inherit="true"/>-->
+                    </effect>
+                </panel>
+            </panel>
+        </layer>
         <layer id="sim1-overlay" childLayout="vertical">
             <panel id="sim1-panel-top" height="5%" width="100%" childLayout="horizontal" style="nifty-panel-no-shadow">
                 <effect>
@@ -247,39 +258,24 @@
                     </control>
                 </panel>
             </panel>-->
-            <panel id="sim1-panel-middle" height="40%" width="100%"/>
-            <panel id="sim1-panel-middle-with-action" height="5%" width="100%">
+            <panel id="sim1-panel-middle" height="45%" width="100%" visibleToMouse="true" >
                 <effect>
-                    <onHover name="hide" targetElement="sim1-panel-bottom" inherit="true"/>
+                    <onHover name="hide" targetElement="sim1-inputpanel" inherit="true" onEndEffect="showNiftyElement(sim1-iconpanel)"/>
                 </effect>
             </panel>
-            <panel id="sim1-panel-bottom" height="50%" width="100%" childLayout="horizontal" style="nifty-panel-no-shadow">
+            <panel id="sim1-inputpanel" height="50%" width="100%" childLayout="horizontal" visibleToMouse="true" style="nifty-panel-no-shadow">
                 <effect>
-                    <onStartScreen name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true"/>
+                    <onStartScreen name="move" mode="in" direction="bottom" length="1000" startDelay="0" inherit="true"/>
                     <onEndScreen name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true"/>
-                    <onShow name="move" mode="in" direction="bottom" length="1000" startDelay="100" inherit="true"/>
+                    <!--<onShow name="move" mode="in" direction="bottom" length="1000" startDelay="100" inherit="true"/>
                     <onHide name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true"/>
+                    <onHover name="move" mode="out" length="1000" startDelay="0" neverStopRendering="true" inherit="true"/>-->
+                    <onStartHover name="show" targetElement="sim1-inputpanel" inherit="true"/>
+                    <onShow name="move" mode="in" direction="bottom" length="1000" startDelay="0" inherit="true"/>
+                    <onHide name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true" onEndEffect="showNiftyElement(sim1-iconpanel)"/>
                 </effect>
             </panel>
-        </layer>
-        <layer id="sim1-mouse-check" childLayout="vertical">
-            <panel id="sim1-panel-mouse-check-top" height="50%" width="100%" visibleToMouse="true" childLayout="center">
-                <effect>
-                    <onHover name="show" targetElement="sim1-panel-mouse-check-bottom" inherit="true"/>
-                </effect>     
-            </panel>
-            <panel id="sim1-panel-mouse-check-middle" height="45%" width="100%" childLayout="center"/>
-            <panel id="sim1-panel-mouse-check-bottom" height="5%" width="100%" childLayout="center" visibleToMouse="true" style="nifty-panel-no-shadow">
-                <effect>
-                    <onStartScreen name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true"/>
-                    <onEndScreen name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true"/>
-                    <onShow name="move" mode="in" direction="bottom" length="100" startDelay="1000" inherit="true"/>
-                    <onHide name="move" mode="out" direction="bottom" length="100" startDelay="0" inherit="true"/>
-                    <onHover name="hide" targetElement="sim1-panel-mouse-check-bottom" inherit="true"/>
-                    <onHover name="show" targetElement="sim1-panel-bottom" inherit="true"/>
-                </effect>
-            </panel>
-        </layer>
+        </layer> 
     </screen>
     <screen id="report">
     </screen>
