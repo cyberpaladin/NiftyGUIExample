@@ -5,8 +5,6 @@
 package mygame;
 
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.effects.EffectEventId;
-import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 
@@ -34,15 +32,7 @@ public class SimScreenController implements ScreenController{
         //System.out.println("" + screen.getScreenId() + " - onEndScreen");
     }
     
-    /** custom methods */ 
-    public void showNiftyElement(String id) {
-        nifty.getCurrentScreen().findElementByName(id).startEffect(EffectEventId.onShow, null);
-    }
-    
-    public void hideNiftyElement(String id) {
-        nifty.getCurrentScreen().findElementByName(id).startEffect(EffectEventId.onHide, null);
-    }
-    
+    /** custom methods */
     public void start(String nextScreen) {
         nifty.gotoScreen(nextScreen);  // switch to another screen
         //System.out.println("" + screen.getScreenId() + " - goToScreen(" + nextScreen + ")");

@@ -220,22 +220,22 @@
         </layer>
     </screen>
     <screen id="sim1" controller="mygame.SimScreenController">
-        <layer id="sim1-mouse-check" childLayout="vertical">
+        <layer id="sim1-overlay-background" childLayout="vertical">
             <panel id="sim1-panel-mouse-check-top" height="95%" width="100%" childLayout="center"/>
             <panel id="sim1-panel-mouse-check-bottom" height="5%" width="100%" childLayout="center">
                 <panel id="sim1-iconpanel" height="100%" width="10%" childLayout="center" visibleToMouse="true" style="nifty-panel-no-shadow">
                     <effect>
-                        <onStartScreen name="move" mode="in" direction="bottom" length="0" startDelay="0" inherit="true" onEndEffect="hideNiftyElement(sim1-iconpanel)"/>
+                        <onStartScreen name="hide" targetElement="sim1-iconpanel" inherit="true"/>
                         <onEndScreen name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true"/>
-                        <onShow name="move" mode="in" direction="bottom" length="100" startDelay="1000" inherit="true"/>
+                        <onShow name="move" mode="in" direction="bottom" length="100" startDelay="0" inherit="true"/>
                         <onHide name="move" mode="out" direction="bottom" length="100" startDelay="0" inherit="true"/>
-                        <onStartHover name="hide" targetElement="sim1-panel-mouse-check-bottom" inherit="true" onEndEffect="showNiftyElement(sim1-inputpanel)"/>
-                        <!--<onHover name="show" targetElement="sim1-panel-bottom" inherit="true"/>-->
+                        <onStartHover name="hide" targetElement="sim1-iconpanel" inherit="true"/>
+                        <onStartHover name="show" targetElement="sim1-inputpanel" startDelay="100" inherit="true"/>
                     </effect>
                 </panel>
             </panel>
         </layer>
-        <layer id="sim1-overlay" childLayout="vertical">
+        <layer id="sim1-overlay-foreground" childLayout="vertical">
             <panel id="sim1-panel-top" height="5%" width="100%" childLayout="horizontal" style="nifty-panel-no-shadow">
                 <effect>
                     <onStartScreen name="move" mode="in" direction="top" length="1000" startDelay="0" inherit="true"/>
@@ -258,21 +258,15 @@
                     </control>
                 </panel>
             </panel>-->
-            <panel id="sim1-panel-middle" height="45%" width="100%" visibleToMouse="true" >
-                <effect>
-                    <onHover name="hide" targetElement="sim1-inputpanel" inherit="true" onEndEffect="showNiftyElement(sim1-iconpanel)"/>
-                </effect>
-            </panel>
+            <panel id="sim1-panel-middle" height="45%" width="100%" visibleToMouse="true"/>
             <panel id="sim1-inputpanel" height="50%" width="100%" childLayout="horizontal" visibleToMouse="true" style="nifty-panel-no-shadow">
                 <effect>
-                    <onStartScreen name="move" mode="in" direction="bottom" length="1000" startDelay="0" inherit="true"/>
+                    <onStartScreen name="show" targetElement="sim1-inputpanel" inherit="true"/>
                     <onEndScreen name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true"/>
-                    <!--<onShow name="move" mode="in" direction="bottom" length="1000" startDelay="100" inherit="true"/>
-                    <onHide name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true"/>
-                    <onHover name="move" mode="out" length="1000" startDelay="0" neverStopRendering="true" inherit="true"/>-->
-                    <onStartHover name="show" targetElement="sim1-inputpanel" inherit="true"/>
                     <onShow name="move" mode="in" direction="bottom" length="1000" startDelay="0" inherit="true"/>
-                    <onHide name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true" onEndEffect="showNiftyElement(sim1-iconpanel)"/>
+                    <onHide name="move" mode="out" direction="bottom" length="1000" startDelay="0" inherit="true"/>
+                    <onEndHover name="hide" targetElement="sim1-inputpanel" inherit="true"/>
+                    <onEndHover name="show" targetElement="sim1-iconpanel" startDelay="1000" inherit="true"/>
                 </effect>
             </panel>
         </layer> 
